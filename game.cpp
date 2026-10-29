@@ -6,26 +6,26 @@ using namespace std;
 
 void showStatus(int day, int cash, const vector<string>& inventory, const vector<int>& counts) {
     cout << "\n===============================" << endl;
-    cout << "【第 " << day << " 天】 现金: $" << cash << endl;
-    cout << "--- 个人背包仓库 ---" << endl;
+    cout << "[ " << day << " day] money: $" << cash << endl;
+    cout << "--- personal storage ---" << endl;
     for (size_t i = 0; i < inventory.size(); ++i) {
-        cout << "  * " << inventory[i] << ": " << counts[i] << " 件" << endl;
+        cout << "  * " << inventory[i] << ": " << counts[i] << endl;
     }
     cout << "===============================" << endl;
 }
 
 void marketScene(int& cash, const vector<string>& marketItems, const vector<int>& marketPrices, vector<int>& playerCounts) {
-    cout << "\n[交易模式] 输入商品编号进行买卖 (例如: 1为芯片), 输入其他退出交易: ";
+    cout << "\n[shopping pattern] input number to market (example: 1 is chip), enter others to quit: ";
     int itemIdx;
     cin >> itemIdx;
     itemIdx--; // 转为 vector 的索引 (0, 1, 2)
 
     if (itemIdx >= 0 && itemIdx < static_cast<int>(marketItems.size())) {
-        cout << "你想 [1] 购买 还是 [2] 出售 " << marketItems[itemIdx] << "？ ";
+        cout << "you want [1] buy or [2] sell " << marketItems[itemIdx] << "? ";
         int action;
         cin >> action;
         
-        cout << "请输入数量: ";
+        cout << "please enter the number of objects: ";
         int amount;
         cin >> amount;
 
@@ -34,17 +34,17 @@ void marketScene(int& cash, const vector<string>& marketItems, const vector<int>
             if (cash >= cost) {
                 cash -= cost;
                 playerCounts[itemIdx] += amount;
-                cout << "交易成功！" << endl;
+                cout << "deal successfully!" << endl;
             } else {
-                cout << "资金不足！" << endl;
+                cout << "money not enough!" << endl;
             }
         } else if (action == 2) { // 出售
             if (playerCounts[itemIdx] >= amount) {
                 cash += marketPrices[itemIdx] * amount;
                 playerCounts[itemIdx] -= amount;
-                cout << "交易成功！" << endl;
+                cout << "successful deal!" << endl;
             } else {
-                cout << "你没有那么多货物！" << endl;
+                cout << "you don't have enough stuff!" << endl;
             }
         }
     }
