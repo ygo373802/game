@@ -1,10 +1,15 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstdlib>
+#include <ctime>
 #include "game.h"
 using namespace std;
 
 int main() {
+    srand(time(0));
+    //设置了一天，这天价格波动极大
+    int surprise_day = rand() % 29 + 1;
     // 基础属性：天数与初始资金
     int currentDay = 1;
     int maxDays = 30; // 游戏目标：生存30天并赚尽可能多的钱
@@ -23,6 +28,10 @@ int main() {
 
     // 核心游戏循环 (Game Loop)
     while (currentDay <= maxDays) {
+        if(currentDay == surprise_day)
+        {
+            cout << "price at today is much more strange, good luck" << endl;
+        }
         // 1. 展示当前玩家状态与背包
         showStatus(currentDay, playerCash, itemNames, playerInventory);
 
@@ -46,9 +55,19 @@ int main() {
             cout << "a safe night, and price are changed" << endl;
             currentDay++;
             // 价格随机波动逻辑（后续通过 rand() 扩充）
+            if(currentDay == surprise_day)
+            {
+            currentPrices[0] = rand() % 141;  
+            currentPrices[1] = rand() % 301; 
+            currentPrices[2] = rand() % 801;
+
+            }
+            else
+            {
             currentPrices[0] = 40 + rand() % 31;  // 40~70
             currentPrices[1] = 90 + rand() % 61;  // 90~150
             currentPrices[2] = 200 + rand() % 201; // 200~400
+            }
         }
     }
 
