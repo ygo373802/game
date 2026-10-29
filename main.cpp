@@ -30,7 +30,7 @@ int main() {
     while (currentDay <= maxDays) {
         if(currentDay == surprise_day)
         {
-            cout << "price at today is much more strange, good luck" << endl;
+            cout << "price at tomorrow is much more strange, good luck" << endl;
         }
         // 1. 展示当前玩家状态与背包
         showStatus(currentDay, playerCash, itemNames, playerInventory);
@@ -60,7 +60,6 @@ int main() {
             currentPrices[0] = rand() % 141;  
             currentPrices[1] = rand() % 301; 
             currentPrices[2] = rand() % 801;
-
             }
             else
             {
